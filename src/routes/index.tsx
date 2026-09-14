@@ -6,7 +6,7 @@ export const Route = createFileRoute('/')({ component: App })
 /* ============================================================================
    EDIT ME — personalize the birthday page here.
    ============================================================================ */
-const HER_NAME = 'Rayn'
+const HER_NAME = 'Her Name'
 const BIRTHDAY = '2026-09-16T00:00:00' // unlocks at local midnight on her device, on this date
 const VIDEO_SRC = '/her-message.mp4' // put your video file in the public/ folder with this exact name
 const CAPSULE_MESSAGE =
@@ -14,12 +14,12 @@ const CAPSULE_MESSAGE =
 const FOOTER_NOTE = `Made for ${HER_NAME}, from farther away than I'd like to be.`
 
 const REASONS: string[] = [
-  'The way you laugh at your own jokes before you even finish telling them.',
-  'How you remember tiny details about my day that I mentioned once, weeks ago.',
-  'Your stubborn belief that things will work out, even when I doubt it.',
-  "The way you say my name right before you're about to tease me.",
+  'The way you laugh after making a bad joke, forcing everyone else to laugh right along with your infectious mirth.',
+  "How you remember everything I tell you, even when it feels like you're not paying attention.",
+  'Your hatred for men who inflict pain on women, and how you never soften your opinions, no matter how the other person reacts.',
+  'The way you write "noni."',
   'How hard you work for the things you want, without ever asking for applause.',
-  'The voice notes you send at 2am because you thought of something you had to tell me.',
+  'The filters you always slap onto your voice notes for no reason.',
   'How you make ordinary days feel like plans worth looking forward to.',
   'The way you get just as excited about my small wins as your own.',
   'Your ability to make me feel close to you even with an ocean in between.',
@@ -246,7 +246,8 @@ function App() {
           For <span className="text-gold-soft">{HER_NAME}</span>
         </h1>
         <p className="text-lavender max-w-[32ch] mt-4 mb-10 text-base md:text-lg">
-          Happy birthday Vianna, Your 18th birthday will be something that you should never forget. Enjoy your day angel!</p>
+          Happy birthday. Everything on this page is about you — open it whenever you're ready.
+        </p>
 
         <div className="flex gap-3 md:gap-7 mb-10" aria-live="polite">
           {mounted && timeLeft && (
