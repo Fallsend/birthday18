@@ -6,7 +6,7 @@ export const Route = createFileRoute('/')({ component: App })
 /* ============================================================================
    EDIT ME — personalize the birthday page here.
    ============================================================================ */
-const HER_NAME = 'Her Name'
+const HER_NAME = 'Rayn'
 const BIRTHDAY = '2026-09-16T00:00:00' // unlocks at local midnight on her device, on this date
 const VIDEO_SRC = '/her-message.mp4' // put your video file in the public/ folder with this exact name
 const CAPSULE_MESSAGE =
