@@ -34,17 +34,31 @@ const REASONS: string[] = [
   'Simply, how you love — fully, loudly, without holding back.',
 ]
 
-type Star = { x: number; y: number; title: string; text: string }
+/* Virgo constellation — real stars, plotted from their right ascension / declination,
+   connected the way Virgo's "Y" asterism is traditionally drawn (Porrima/γ as the
+   branch point, or "heart", of the figure). */
+type Star = { x: number; y: number; name: string; title: string; text: string }
 const STARS: Star[] = [
-  { x: 40, y: 260, title: 'Your Smile', text: 'The one that reaches your eyes and somehow still reaches me from thousands of miles away.' },
-  { x: 110, y: 180, title: 'Your Strength', text: 'The days you carried yourself through without ever letting the world see the weight of it.' },
-  { x: 95, y: 90, title: 'Your Laugh', text: 'Loud, sudden, completely unfiltered — my favorite sound, hands down.' },
-  { x: 180, y: 60, title: 'Your Dreams', text: 'Big enough that I want a front-row seat to watch every one of them come true.' },
-  { x: 230, y: 140, title: 'Your Kindness', text: 'The way you make total strangers feel like they matter.' },
-  { x: 300, y: 80, title: 'Home', text: 'Wherever you are already feels like the place I most want to be.' },
-  { x: 360, y: 150, title: 'Us', text: 'Two time zones, one very stubborn constant.' },
-  { x: 330, y: 250, title: 'Your Mind', text: "Sharp, curious, endlessly interesting — I never get tired of talking to you." },
-  { x: 250, y: 300, title: 'Forever', text: 'The one thing in all of this I am completely, certainly sure of.' },
+  { x: 50, y: 106, name: 'ν Vir', title: 'Home', text: 'Wherever you are already feels like the place I most want to be.' },
+  { x: 63, y: 166, name: 'Zavijava', title: 'Us', text: 'Two time zones, one very stubborn constant.' },
+  { x: 145, y: 197, name: 'Zaniah', title: 'Your Mind', text: "Sharp, curious, endlessly interesting — I never get tired of talking to you." },
+  { x: 205, y: 207, name: 'Porrima', title: 'Forever', text: "The heart of this whole shape, same as it's the heart of everything else — the one thing I'm completely, certainly sure of." },
+  { x: 244, y: 146, name: 'Auva', title: 'Your Dreams', text: 'Big enough that I want a front-row seat to watch every one of them come true.' },
+  { x: 262, y: 50, name: 'Vindemiatrix', title: 'Your Kindness', text: 'The way you make total strangers feel like they matter.' },
+  { x: 326, y: 330, name: 'Spica', title: 'Your Smile', text: 'The brightest thing in the whole sky, same as yours is the brightest thing in any room.' },
+  { x: 353, y: 196, name: 'Heze', title: 'Your Strength', text: 'The days you carried yourself through without ever letting the world see the weight of it.' },
+  { x: 450, y: 265, name: 'Syrma', title: 'Your Laugh', text: 'Loud, sudden, completely unfiltered — my favorite sound, hands down.' },
+]
+// lines connecting the stars, indices into STARS — draws Virgo's traditional branching shape
+const EDGES: [number, number][] = [
+  [0, 1],
+  [1, 2],
+  [2, 3],
+  [3, 4],
+  [4, 5],
+  [3, 6],
+  [6, 7],
+  [7, 8],
 ]
 
 type QuizItem = { q: string; options: string[]; reveal: string }
@@ -347,11 +361,12 @@ function App() {
       {/* ================= CONSTELLATION ================= */}
       <section id="constellation" className="relative z-10 min-h-screen flex flex-col items-center justify-center text-center px-6 py-20">
         <h2 className="font-display font-semibold text-2xl md:text-4xl mb-2">Your constellation</h2>
-        <p className="text-lavender max-w-[40ch] mb-6">Every star is something about you. Tap one.</p>
+        <p className="text-lavender max-w-[40ch] mb-6">Virgo — every star is something about you. Tap one.</p>
 
-        <svg viewBox="0 0 500 360" role="img" aria-label="An interactive constellation" className="w-full max-w-[560px] h-auto mt-4">
-          {STARS.slice(0, -1).map((a, i) => {
-            const b = STARS[i + 1]
+        <svg viewBox="0 0 500 360" role="img" aria-label="Virgo, drawn as an interactive constellation" className="w-full max-w-[560px] h-auto mt-4">
+          {EDGES.map(([ai, bi], i) => {
+            const a = STARS[ai]
+            const b = STARS[bi]
             return <line key={i} x1={a.x} y1={a.y} x2={b.x} y2={b.y} stroke="hsl(var(--gold) / 0.28)" strokeWidth={1} />
           })}
           {STARS.map((star, i) => (
@@ -359,7 +374,7 @@ function App() {
               key={i}
               tabIndex={0}
               role="button"
-              aria-label={star.title}
+              aria-label={`${star.name}: ${star.title}`}
               className="cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold"
               onClick={() => setActiveStar(i)}
               onKeyDown={(e) => {
@@ -383,6 +398,7 @@ function App() {
 
         {activeStar !== null && (
           <div className="mt-8 max-w-[380px] px-7 py-6 border border-gold/30 rounded-lg bg-gold/5">
+            <p className="text-lavender text-xs tracking-wide mb-1">{STARS[activeStar].name}</p>
             <h3 className="font-display text-lg text-gold-soft mb-2">{STARS[activeStar].title}</h3>
             <p className="text-cream mb-4">{STARS[activeStar].text}</p>
             <button onClick={() => setActiveStar(null)} className="text-lavender text-sm underline bg-transparent border-none cursor-pointer p-0">
