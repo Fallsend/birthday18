@@ -246,8 +246,7 @@ function App() {
           For <span className="text-gold-soft">{HER_NAME}</span>
         </h1>
         <p className="text-lavender max-w-[32ch] mt-4 mb-10 text-base md:text-lg">
-          Happy birthday. Everything on this page is about you — open it whenever you're ready.
-        </p>
+          Happy birthday Vianna, Your 18th birthday will be something that you should never forget. Enjoy your day angel!</p>
 
         <div className="flex gap-3 md:gap-7 mb-10" aria-live="polite">
           {mounted && timeLeft && (
