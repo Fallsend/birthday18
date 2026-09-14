@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap');
 @import 'tailwindcss';
 @import 'tw-animate-css';
 
@@ -59,6 +60,17 @@
   --sidebar-accent-foreground: 0 0% 9%;
   --sidebar-border: 0 0% 89.8%;
   --sidebar-ring: 0 0% 3.9%;
+
+  /* birthday page: night-sky palette */
+  --night-deep: 233 45% 8%;
+  --night: 233 41% 13%;
+  --night-light: 234 45% 22%;
+  --night-lighter: 233 40% 27%;
+  --gold: 41 71% 68%;
+  --gold-soft: 42 76% 82%;
+  --rose: 353 52% 76%;
+  --cream: 42 33% 93%;
+  --lavender: 237 30% 71%;
 }
 
 .dark {
@@ -153,6 +165,19 @@
   --color-sidebar-accent-foreground: hsl(var(--sidebar-accent-foreground));
   --color-sidebar-border: hsl(var(--sidebar-border));
   --color-sidebar-ring: hsl(var(--sidebar-ring));
+
+  /* birthday page tokens */
+  --color-night-deep: hsl(var(--night-deep));
+  --color-night: hsl(var(--night));
+  --color-night-light: hsl(var(--night-light));
+  --color-night-lighter: hsl(var(--night-lighter));
+  --color-gold: hsl(var(--gold));
+  --color-gold-soft: hsl(var(--gold-soft));
+  --color-rose: hsl(var(--rose));
+  --color-cream: hsl(var(--cream));
+  --color-lavender: hsl(var(--lavender));
+  --font-display: 'Fraunces', serif;
+  --font-body: 'Inter', sans-serif;
 }
 
 body {
@@ -170,6 +195,31 @@ body {
     background-color: hsl(var(--background));
     color: hsl(var(--foreground));
   }
+}
+
+/* birthday page keyframes */
+@keyframes bday-twinkle {
+  0%, 100% { opacity: .15; }
+  50% { opacity: .85; }
+}
+@keyframes bday-pulse {
+  0%, 100% { opacity: .75; }
+  50% { opacity: 1; }
+}
+@keyframes bday-bob {
+  0%, 100% { transform: rotate(45deg) translate(0, 0); }
+  50% { transform: rotate(45deg) translate(4px, 4px); }
+}
+@keyframes bday-shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-6px); }
+  75% { transform: translateX(6px); }
+}
+@keyframes bday-fall {
+  to { transform: translateY(110vh) rotate(30deg); opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .bday-motion { animation: none !important; }
 }
 
 /* Hide Vite badge and error messages */
