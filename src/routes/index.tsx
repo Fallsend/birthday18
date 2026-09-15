@@ -37,17 +37,97 @@ const REASONS: string[] = [
 /* Virgo constellation — real stars, plotted from their right ascension / declination,
    connected the way Virgo's "Y" asterism is traditionally drawn (Porrima/γ as the
    branch point, or "heart", of the figure). */
-type Star = { x: number; y: number; name: string; title: string; text: string }
+type Star = {
+  x: number
+  y: number
+  name: string
+  character: string
+  media: string
+  image: string
+  desc: string
+}
 const STARS: Star[] = [
-  { x: 50, y: 106, name: 'ν Vir', title: 'Home', text: 'Wherever you are already feels like the place I most want to be.' },
-  { x: 63, y: 166, name: 'Zavijava', title: 'Us', text: 'Two time zones, one very stubborn constant.' },
-  { x: 145, y: 197, name: 'Zaniah', title: 'Your Mind', text: "Sharp, curious, endlessly interesting — I never get tired of talking to you." },
-  { x: 205, y: 207, name: 'Porrima', title: 'Forever', text: "The heart of this whole shape, same as it's the heart of everything else — the one thing I'm completely, certainly sure of." },
-  { x: 244, y: 146, name: 'Auva', title: 'Your Dreams', text: 'Big enough that I want a front-row seat to watch every one of them come true.' },
-  { x: 262, y: 50, name: 'Vindemiatrix', title: 'Your Kindness', text: 'The way you make total strangers feel like they matter.' },
-  { x: 326, y: 330, name: 'Spica', title: 'Your Smile', text: 'The brightest thing in the whole sky, same as yours is the brightest thing in any room.' },
-  { x: 353, y: 196, name: 'Heze', title: 'Your Strength', text: 'The days you carried yourself through without ever letting the world see the weight of it.' },
-  { x: 450, y: 265, name: 'Syrma', title: 'Your Laugh', text: 'Loud, sudden, completely unfiltered — my favorite sound, hands down.' },
+  {
+    x: 50,
+    y: 106,
+    name: 'ν Vir',
+    character: 'Wanderer',
+    media: 'Genshin Impact',
+    image: '/characters/wanderer.png',
+    desc: 'Formerly known as Scaramouche and the Balladeer, the Sixth Fatui Harbinger. Created by the Raiden Shogun as a prototype puppet, he endured centuries of abandonment and betrayal before severing his past through Irminsul. Now walking freely as an Anemo Wanderer, he conceals a deeply loyal and protective heart beneath a razor-sharp, sarcastic tongue.',
+  },
+  {
+    x: 63,
+    y: 166,
+    name: 'Zavijava',
+    character: 'Luka & Hyuna',
+    media: 'Alien Stage (ALNST)',
+    image: '/characters/luka_hyuna.jpg',
+    desc: 'The deeply intertwined legends of Alien Stage. Hyuna is the fierce, charismatic rebel leader with an indomitable will and stage presence that sparked a revolution. Luka is the alluring, melancholic top star with an enigmatic facade and profound childhood scars. From Anakt Garden to the haunting chords of "Wiege," their connection is one of the most intense, tragic, and unforgettable bonds in the series.',
+  },
+  {
+    x: 145,
+    y: 197,
+    name: 'Zaniah',
+    character: 'Princess Luna',
+    media: 'My Little Pony',
+    image: '/characters/luna.png',
+    desc: 'The regal Princess of the Night and co-ruler of Equestria. After being trapped in the dark isolation of Nightmare Moon for a thousand years, she was redeemed through friendship. Endearingly formal, deeply caring, and devoted to guarding ponies inside the dream realm, she embodies redemption, midnight beauty, and gentle strength.',
+  },
+  {
+    x: 205,
+    y: 207,
+    name: 'Porrima',
+    character: 'Midge Maisel',
+    media: 'The Marvelous Mrs. Maisel',
+    image: '/characters/mrs_maisel.jpg',
+    desc: 'Miriam "Midge" Maisel is a brilliant, quick-witted 1950s New Yorker who turns sudden heartbreak into a trailblazing career as a stand-up comedian. Armed with rapid-fire comedic genius, immaculate style, and unstoppable confidence, she refuses to let anyone diminish her ambition, owning the stage completely on her own terms.',
+  },
+  {
+    x: 244,
+    y: 146,
+    name: 'Auva',
+    character: 'Jinx & Ekko',
+    media: 'Arcane',
+    image: '/characters/jinx_ekko.png',
+    desc: 'The Boy Savior and the Loose Cannon—childhood best friends from the Undercity whose bond became a heartbreaking collision of loyalty, trauma, and time. While Ekko leads the Firelights with hope and brilliance, Jinx battles grief and chaotic genius. Their bittersweet history (TimeBomb) remains one of the most visually stunning and emotionally resonant relationships in Arcane.',
+  },
+  {
+    x: 262,
+    y: 50,
+    name: 'Vindemiatrix',
+    character: 'Gloria Delgado-Pritchett',
+    media: 'Modern Family',
+    image: '/characters/gloria.jpg',
+    desc: 'The passionate, glamorous, and fiercely protective Colombian matriarch. Unapologetically vibrant, loudly loving, and always ready to defend her family (often with hilarious mispronunciations and unforgettable stories), Gloria brings fiery energy, endless laughs, and immense heart to everyone around her.',
+  },
+  {
+    x: 326,
+    y: 330,
+    name: 'Spica',
+    character: 'Mini Durin',
+    media: 'Genshin Impact',
+    image: '/characters/durin.png',
+    desc: 'The gentle-hearted dragon from the storybook realm of Simulanka. Born from a legacy of tragedy and fear, Mini Durin only ever yearned for warmth, flight, and genuine companionship. His journey proved that regardless of past curses or origins, kindness and friendship can write an entirely new, heartwarming destiny.',
+  },
+  {
+    x: 353,
+    y: 196,
+    name: 'Heze',
+    character: 'Kim Seyeong & Shin Heejae',
+    media: 'Netkama Punch!!!',
+    image: '/characters/netkama.jpg',
+    desc: 'The chaotic and addictive duo from the virtual world of Arcadia. When Seyeong takes on a female avatar to catfish top-ranking player Shin Heejae for revenge, he never expects Heejae to fall so completely and protectively in love with his persona. Their dynamic turns an elaborate gaming prank into a hilarious, sweet, and unforgettable romance.',
+  },
+  {
+    x: 450,
+    y: 265,
+    name: 'Syrma',
+    character: 'Rudo Surebrec',
+    media: 'Gachiakuta',
+    image: '/characters/rudo.png',
+    desc: 'The relentless, fiery protagonist of Gachiakuta. Wrongfully framed and cast down from the Sphere into the lethal Abyss, Rudo refuses to surrender. Using his vital instrument gloves that give life to the souls of discarded things, he fights through the wasteland with grit, fierce loyalty to his fellow Cleaners, and an unshakeable sense of justice.',
+  },
 ]
 // lines connecting the stars, indices into STARS — draws Virgo's traditional branching shape
 const EDGES: [number, number][] = [
@@ -358,7 +438,7 @@ function App() {
       {/* ================= CONSTELLATION ================= */}
       <section id="constellation" className="relative z-10 min-h-screen flex flex-col items-center justify-center text-center px-6 py-20">
         <h2 className="font-display font-semibold text-2xl md:text-4xl mb-2">Your constellation</h2>
-        <p className="text-lavender max-w-[40ch] mb-6">Virgo — every star is something about you. Tap one.</p>
+        <p className="text-lavender max-w-[44ch] mb-6">Virgo — tap any star to reveal one of your favorite characters.</p>
 
         <svg viewBox="0 0 500 360" role="img" aria-label="Virgo, drawn as an interactive constellation" className="w-full max-w-[560px] h-auto mt-4">
           {EDGES.map(([ai, bi], i) => {
@@ -371,7 +451,7 @@ function App() {
               key={i}
               tabIndex={0}
               role="button"
-              aria-label={`${star.name}: ${star.title}`}
+              aria-label={`${star.name}: ${star.character}`}
               className="cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold"
               onClick={() => setActiveStar(i)}
               onKeyDown={(e) => {
@@ -394,12 +474,31 @@ function App() {
         </svg>
 
         {activeStar !== null && (
-          <div className="mt-8 max-w-[380px] px-7 py-6 border border-gold/30 rounded-lg bg-gold/5">
-            <p className="text-lavender text-xs tracking-wide mb-1">{STARS[activeStar].name}</p>
-            <h3 className="font-display text-lg text-gold-soft mb-2">{STARS[activeStar].title}</h3>
-            <p className="text-cream mb-4">{STARS[activeStar].text}</p>
-            <button onClick={() => setActiveStar(null)} className="text-lavender text-sm underline bg-transparent border-none cursor-pointer p-0">
-              close
+          <div className="mt-8 w-full max-w-[460px] px-6 py-6 border border-gold/35 rounded-2xl bg-night-deep/95 backdrop-blur-md shadow-2xl flex flex-col items-center text-center">
+            {STARS[activeStar].image && (
+              <div className="w-full h-56 mb-4 rounded-xl overflow-hidden border border-gold/30 bg-black/40 shadow-inner flex items-center justify-center">
+                <img
+                  src={STARS[activeStar].image}
+                  alt={STARS[activeStar].character}
+                  className="w-full h-full object-cover"
+                  loading="lazy"
+                />
+              </div>
+            )}
+            <span className="text-gold text-xs tracking-widest uppercase font-medium">
+              {STARS[activeStar].name} • {STARS[activeStar].media}
+            </span>
+            <h3 className="font-display text-2xl text-gold-soft mt-1 mb-3 font-semibold">
+              {STARS[activeStar].character}
+            </h3>
+            <p className="text-cream/90 text-sm md:text-base leading-relaxed mb-5 text-left">
+              {STARS[activeStar].desc}
+            </p>
+            <button
+              onClick={() => setActiveStar(null)}
+              className="px-6 py-1.5 rounded-full border border-gold/40 text-gold-soft hover:bg-gold/15 text-xs font-medium tracking-wider uppercase transition cursor-pointer"
+            >
+              Close
             </button>
           </div>
         )}
