@@ -7,7 +7,7 @@ export const Route = createFileRoute('/')({ component: App })
    EDIT ME — personalize the birthday page here.
    ============================================================================ */
 const HER_NAME = 'Rayn'
-const BIRTHDAY = '2026-09-15T00:00:00' // TEMP CHECK
+const BIRTHDAY = '2026-09-16T00:00:00' // unlocks at local midnight on her device, on this date
 const VIDEO_SRC = 'https://assets.macaly-user-data.dev/gy1ra4desaglzg1x6dvf9yoh/caci2yr6wabjr2w2z80x1e09/s2ecPjuPJjQxn2v5p_YPJ.mp4' // uploaded via Macaly's media library
 const CAPSULE_MESSAGE =
   "Happy birthday, my love. I couldn't be there to hand you this myself, so I built you something instead. Press play — I made this just for you."
