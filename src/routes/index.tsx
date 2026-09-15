@@ -141,37 +141,36 @@ const EDGES: [number, number][] = [
   [7, 8],
 ]
 
-type QuizItem = { q: string; options: string[]; reveal: string }
+type QuizItem = {
+  q: string
+  placeholder: string
+  funnyLine: string
+}
 const QUIZ: QuizItem[] = [
   {
-    q: "What's the real reason I check my phone the second I wake up?",
-    options: ['Habit', 'Waiting for the sun to rise on your side of the world', 'Hoping for a good morning from you'],
-    reveal: 'The last one. Always the last one. Waking up to your message is my favorite way to start any day.',
+    q: 'Why do you like eating ice?',
+    placeholder: 'Type your freezing cold confession here...',
+    funnyLine: 'Crunch crunch... your teeth must be made of vibranium. Are you secretly anemic or just part penguin? 🐧🧊',
   },
   {
-    q: 'Why do I save the voice notes you send me?',
-    options: ['I forget things easily', 'Your voice is my favorite sound', 'Both, honestly'],
-    reveal: 'Both — but mostly the second one. I could listen to you talk about nothing for hours.',
+    q: 'How did you start reading yaoi?',
+    placeholder: 'Explain yourself...',
+    funnyLine: 'Admit it, you saw one suspicious panel on Pinterest and suddenly your whole algorithm was cooked forever. 📖✨',
   },
   {
-    q: 'What do I actually think about in boring meetings?',
-    options: ['Lunch', 'You', "Whether you've eaten yet"],
-    reveal: "You, and yes — whether you've eaten yet. I've never been great at multitasking except for this.",
+    q: 'When did you start actually loving me?',
+    placeholder: 'Be completely honest...',
+    funnyLine: "Take your time. If the answer is 'the day you sent me food', I won't even be mad. 🍔❤️",
   },
   {
-    q: 'Why do I count down the days until I see you again?',
-    options: ["I'm impatient by nature", 'Because every day closer feels like progress', 'Because the distance never gets easier, only worth it'],
-    reveal: 'The distance never gets easier. It just keeps being worth it.',
+    q: "What's your favourite meal?",
+    placeholder: 'Name the ultimate dish...',
+    funnyLine: "Choose carefully. This answer will be cited as legal evidence in future 'where should we eat?' arguments. 🍽️👀",
   },
   {
-    q: "What's my actual favorite thing about you?",
-    options: ['Your laugh', 'Your heart', 'Honestly, all of it'],
-    reveal: "I tried to pick just one for a long time. I couldn't. It's all of it.",
-  },
-  {
-    q: 'Where do I picture us in the future?',
-    options: ['Same city, finally', 'No more time zones between us', 'Wherever you are'],
-    reveal: "All three, if I'm honest. But mostly — wherever you are, that's home.",
+    q: 'What do you like the most about yourself?',
+    placeholder: 'Tell me your favorite thing about you...',
+    funnyLine: "'Everything' is 100% the correct answer, but let's hear the full unfiltered narcissism please. 👑💅",
   },
 ]
 
@@ -192,7 +191,8 @@ function App() {
   const [activeStar, setActiveStar] = useState<number | null>(null)
 
   const [quizIndex, setQuizIndex] = useState(0)
-  const [chosenOption, setChosenOption] = useState<number | null>(null)
+  const [currentAnswer, setCurrentAnswer] = useState('')
+  const [answers, setAnswers] = useState<string[]>([])
   const [quizDone, setQuizDone] = useState(false)
 
   const [bgStars, setBgStars] = useState<BgStar[]>([])
@@ -260,11 +260,6 @@ function App() {
     touchStartX.current = null
   }
 
-  function chooseOption(i: number) {
-    if (chosenOption !== null) return
-    setChosenOption(i)
-  }
-
   function dropHearts() {
     if (typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
     const symbols = ['♥', '✦', '♥', '✧']
@@ -283,13 +278,17 @@ function App() {
     }
   }
 
-  function nextQuiz() {
+  function handleNextQuiz() {
+    const nextAns = [...answers]
+    nextAns[quizIndex] = currentAnswer.trim()
+    setAnswers(nextAns)
+    setCurrentAnswer('')
+
     if (quizIndex + 1 >= QUIZ.length) {
       setQuizDone(true)
       dropHearts()
     } else {
       setQuizIndex((i) => i + 1)
-      setChosenOption(null)
     }
   }
 
@@ -506,44 +505,71 @@ function App() {
 
       {/* ================= QUIZ ================= */}
       <section id="quiz" className="relative z-10 min-h-screen flex flex-col items-center justify-center text-center px-6 py-20">
-        <h2 className="font-display font-semibold text-2xl md:text-4xl mb-2">How well do you know yourself?</h2>
-        <p className="text-lavender max-w-[40ch] mb-8">Careful — every answer here is true.</p>
+        <h2 className="font-display font-semibold text-2xl md:text-4xl mb-2">Pop Quiz For You</h2>
+        <p className="text-lavender max-w-[42ch] mb-8">No wrong answers, but you will be judged lovingly.</p>
 
         {!quizDone ? (
-          <div className="w-full max-w-[480px]">
-            <p className="text-lavender text-sm mb-4">
+          <div className="w-full max-w-[500px] flex flex-col items-center">
+            <span className="text-gold/80 text-xs font-medium tracking-widest uppercase mb-3">
               Question {quizIndex + 1} of {QUIZ.length}
+            </span>
+            <p className="font-display text-2xl md:text-3xl mb-6 text-cream font-medium">
+              {currentQuiz.q}
             </p>
-            <p className="font-display text-xl md:text-2xl mb-7">{currentQuiz.q}</p>
-            <div className="flex flex-col gap-3">
-              {currentQuiz.options.map((opt, i) => (
-                <button
-                  key={i}
-                  onClick={() => chooseOption(i)}
-                  disabled={chosenOption !== null}
-                  className={`text-left px-4 py-3 rounded-md border text-cream text-[.95rem] transition ${
-                    chosenOption === i ? 'border-gold bg-gold/10' : 'border-gold/25 bg-cream/[0.03] hover:bg-gold/10 hover:border-gold/50'
-                  } focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold`}
-                >
-                  {opt}
-                </button>
-              ))}
+
+            {/* Answer Input Box */}
+            <div className="w-full mb-3">
+              <textarea
+                value={currentAnswer}
+                onChange={(e) => setCurrentAnswer(e.target.value)}
+                placeholder={currentQuiz.placeholder}
+                rows={3}
+                className="w-full px-4 py-3 rounded-xl border border-gold/35 bg-night-deep/80 text-cream placeholder:text-lavender/40 text-base focus:border-gold focus:outline-none focus:ring-2 focus:ring-gold/30 transition resize-none shadow-inner"
+              />
             </div>
-            {chosenOption !== null && <p className="font-display italic text-gold-soft mt-6 text-[1.05rem]">{currentQuiz.reveal}</p>}
-            {chosenOption !== null && (
-              <button
-                onClick={nextQuiz}
-                className="mt-7 border border-gold text-gold-soft rounded-full px-7 py-2.5 bg-transparent hover:bg-gold/10 transition"
-              >
-                Continue
-              </button>
-            )}
+
+            {/* Funny Line in Yellow below the type thing */}
+            <p className="text-amber-300 font-display italic text-sm md:text-base leading-relaxed mb-8 px-3">
+              {currentQuiz.funnyLine}
+            </p>
+
+            <button
+              onClick={handleNextQuiz}
+              disabled={!currentAnswer.trim()}
+              className={`border border-gold rounded-full px-8 py-2.5 transition text-xs tracking-wider uppercase font-semibold ${
+                currentAnswer.trim()
+                  ? 'text-gold-soft hover:bg-gold/15 cursor-pointer shadow-lg shadow-gold/10 hover:scale-[1.02]'
+                  : 'text-lavender/30 border-gold/20 cursor-not-allowed opacity-50'
+              }`}
+            >
+              {quizIndex + 1 >= QUIZ.length ? 'Finish ✨' : 'Next Question →'}
+            </button>
           </div>
         ) : (
-          <p className="font-display text-2xl md:text-3xl max-w-[34ch]">
-            You made it through every question, and got the same answer every time: I love you, {HER_NAME}. Happy birthday. I can't wait to close
-            this distance for good.
-          </p>
+          <div className="w-full max-w-[520px] flex flex-col items-center text-center">
+            <span className="text-4xl mb-3">💌</span>
+            <h3 className="font-display text-2xl md:text-3xl text-gold-soft mb-3">
+              Answers Recorded!
+            </h3>
+            <p className="font-display text-lg md:text-xl text-cream leading-relaxed mb-8">
+              You made it through every question, and got the same answer every time: I love you, {HER_NAME}. Happy birthday. I can't wait to close this distance for good.
+            </p>
+
+            {/* Summary of her answers */}
+            <div className="w-full bg-night-deep/90 border border-gold/30 rounded-2xl p-6 text-left flex flex-col gap-4 shadow-xl">
+              <span className="text-gold text-xs uppercase tracking-widest font-semibold border-b border-gold/20 pb-2">
+                Your Confessions:
+              </span>
+              {QUIZ.map((item, idx) => (
+                <div key={idx} className="text-sm">
+                  <p className="text-lavender font-medium">{idx + 1}. {item.q}</p>
+                  <p className="text-amber-200/90 italic mt-1 pl-3 border-l-2 border-gold/40">
+                    "{answers[idx] || 'No answer'}"
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
         )}
       </section>
 
