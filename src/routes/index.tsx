@@ -476,11 +476,11 @@ function App() {
         {activeStar !== null && (
           <div className="mt-8 w-full max-w-[460px] px-6 py-6 border border-gold/35 rounded-2xl bg-night-deep/95 backdrop-blur-md shadow-2xl flex flex-col items-center text-center">
             {STARS[activeStar].image && (
-              <div className="w-full h-56 mb-4 rounded-xl overflow-hidden border border-gold/30 bg-black/40 shadow-inner flex items-center justify-center">
+              <div className="w-full h-72 md:h-80 mb-4 rounded-xl overflow-hidden border border-gold/30 bg-black/60 shadow-inner flex items-center justify-center p-2">
                 <img
                   src={STARS[activeStar].image}
                   alt={STARS[activeStar].character}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-contain rounded-lg drop-shadow-md"
                   loading="lazy"
                 />
               </div>
