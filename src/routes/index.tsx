@@ -239,9 +239,6 @@ function App() {
 
       {/* ================= HERO ================= */}
       <section id="hero" className="relative z-10 min-h-screen flex flex-col items-center justify-center text-center px-6 py-20">
-        <p className="font-display italic text-lavender text-base md:text-lg mb-3">
-          I couldn't be there to hand this to you, so I built it instead.
-        </p>
         <h1 className="font-display font-semibold text-4xl md:text-6xl leading-tight">
           For <span className="text-gold-soft">{HER_NAME}</span>
         </h1>
