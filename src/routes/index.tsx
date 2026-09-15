@@ -8,7 +8,7 @@ export const Route = createFileRoute('/')({ component: App })
    ============================================================================ */
 const HER_NAME = 'Rayn'
 const BIRTHDAY = '2026-09-16T00:00:00' // unlocks at local midnight on her device, on this date
-const VIDEO_SRC = '/her-message.mp4' // put your video file in the public/ folder with this exact name
+const VIDEO_SRC = 'https://assets.macaly-user-data.dev/gy1ra4desaglzg1x6dvf9yoh/caci2yr6wabjr2w2z80x1e09/s2ecPjuPJjQxn2v5p_YPJ.mp4' // uploaded via Macaly's media library
 const CAPSULE_MESSAGE =
   "Happy birthday, my love. I couldn't be there to hand you this myself, so I built you something instead. Press play — I made this just for you."
 const FOOTER_NOTE = `Made for ${HER_NAME}, from farther away than I'd like to be.`
